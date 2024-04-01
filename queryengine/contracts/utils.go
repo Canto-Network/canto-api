@@ -127,6 +127,7 @@ var holidayMap = map[string]float64{
 	"30" + time.December.String(): 4,
 	"13" + time.January.String():  4,
 	"17" + time.February.String(): 4,
+	"29" + time.March.String():    4,
 	"25" + time.May.String():      4,
 }
 
