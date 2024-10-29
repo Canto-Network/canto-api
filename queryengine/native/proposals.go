@@ -70,6 +70,22 @@ func GetProposalMetadata(content *types1.Any) (BasicMetadata, error) {
 			Title:       metadata.GetTitle(),
 			Description: metadata.GetDescription(),
 		}, nil
+	// TODO ADD DESCRIPTIONS
+	case "/cosmos.gov.v1.MsgUpdateParams":
+		return BasicMetadata{
+			Title:       "Governance Update Params",
+			Description: "Lorem ipsum dolor sit amet, consectetur",
+		}, nil
+	case "/canto.govshuttle.v1.MsgLendingMarketProposal":
+		return BasicMetadata{
+			Title:       "Lending Market",
+			Description: "Lorem ipsum dolor sit amet, consectetur",
+		}, nil
+	case "/cosmos.slashing.v1beta1.MsgUpdateParams":
+		return BasicMetadata{
+			Title:       "Slashing Update Params",
+			Description: "Lorem ipsum dolor sit amet, consectetur",
+		}, nil
 	default:
 		return BasicMetadata{}, fmt.Errorf("Proposal type: %s not found", typeUrl)
 	}
