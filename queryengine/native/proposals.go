@@ -3,14 +3,16 @@ package queryengine
 import (
 	"fmt"
 
-	erc20 "github.com/Canto-Network/Canto/v6/x/erc20/types"
-	govshuttle "github.com/Canto-Network/Canto/v6/x/govshuttle/types"
+	erc20 "github.com/Canto-Network/Canto/v8/x/erc20/types"
+	govshuttle "github.com/Canto-Network/Canto/v8/x/govshuttle/types"
 	types1 "github.com/cosmos/cosmos-sdk/codec/types"
 	distribution "github.com/cosmos/cosmos-sdk/x/distribution/types"
 	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
 	params "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
-	upgrade "github.com/cosmos/cosmos-sdk/x/upgrade/types"
-	clienttypes "github.com/cosmos/ibc-go/v3/modules/core/02-client/types"
+
+	// upgrade "github.com/cosmos/cosmos-sdk/x/upgrade/types"
+	upgrade "cosmossdk.io/x/upgrade/types"
+	clienttypes "github.com/cosmos/ibc-go/v8/modules/core/02-client/types"
 )
 
 type BasicMetadata struct {

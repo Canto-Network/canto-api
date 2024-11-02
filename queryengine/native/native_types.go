@@ -5,11 +5,13 @@ import (
 	"strconv"
 	"time"
 
-	csr "github.com/Canto-Network/Canto/v6/x/csr/types"
-	inflation "github.com/Canto-Network/Canto/v6/x/inflation/types"
+	csr "github.com/Canto-Network/Canto/v8/x/csr/types"
+	inflation "github.com/Canto-Network/Canto/v8/x/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	query "github.com/cosmos/cosmos-sdk/types/query"
+
 	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
+	// gov "cosmossdk.io/api/cosmos/gov/v1"
 	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/rs/zerolog/log"
 )
