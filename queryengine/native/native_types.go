@@ -11,7 +11,6 @@ import (
 	query "github.com/cosmos/cosmos-sdk/types/query"
 
 	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
-	// gov "cosmossdk.io/api/cosmos/gov/v1"
 	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
 	"github.com/rs/zerolog/log"
 )

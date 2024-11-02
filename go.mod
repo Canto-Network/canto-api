@@ -2,8 +2,6 @@ module canto-api
 
 go 1.21
 
-toolchain go1.23.2
-
 require (
 	cosmossdk.io/math v1.3.0
 	cosmossdk.io/x/upgrade v0.1.0
