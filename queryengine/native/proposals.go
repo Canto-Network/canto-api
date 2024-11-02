@@ -7,7 +7,7 @@ import (
 	govshuttle "github.com/Canto-Network/Canto/v8/x/govshuttle/types"
 	types1 "github.com/cosmos/cosmos-sdk/codec/types"
 	distribution "github.com/cosmos/cosmos-sdk/x/distribution/types"
-	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
+	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
 	params "github.com/cosmos/cosmos-sdk/x/params/types/proposal"
 
 	// upgrade "github.com/cosmos/cosmos-sdk/x/upgrade/types"

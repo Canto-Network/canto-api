@@ -18,10 +18,10 @@ require (
 	github.com/rs/zerolog v1.32.0
 	github.com/swaggo/swag v1.16.1
 	google.golang.org/grpc v1.63.2
-	cosmossdk.io/api v0.7.5
 )
 
 require (
+	cosmossdk.io/api v0.7.5 // indirect
 	cosmossdk.io/collections v0.4.0 // indirect
 	cosmossdk.io/core v0.12.0 // indirect
 	cosmossdk.io/depinject v1.0.0-alpha.4 // indirect
