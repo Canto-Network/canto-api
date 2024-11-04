@@ -83,13 +83,3 @@ func GetProposalMetadata(content *types1.Any) (BasicMetadata, error) {
 		return BasicMetadata{}, fmt.Errorf("Proposal type: %s not found", typeUrl)
 	}
 }
-
-func anyToString(any *types1.Any) string {
-	// Marshal the Any type to JSON
-	jsonBytes, err := any.MarshalJSON()
-	if err != nil {
-		return ""
-	}
-	// Convert JSON bytes to string
-	return string(jsonBytes)
-}
