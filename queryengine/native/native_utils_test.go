@@ -4,7 +4,8 @@ import (
 	"reflect"
 	"testing"
 
-	inflation "github.com/Canto-Network/Canto/v6/x/inflation/types"
+	math "cosmossdk.io/math"
+	inflation "github.com/Canto-Network/Canto/v8/x/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
@@ -17,63 +18,63 @@ func TestGetStakingAPR(t *testing.T) {
 	tests := []struct {
 		name string
 		args args
-		want sdk.Dec
+		want math.LegacyDec
 	}{
 		{
 			name: "test bonded tokens are zero",
 			args: args{
 				pool: staking.QueryPoolResponse{
 					Pool: staking.Pool{
-						BondedTokens: sdk.ZeroInt(),
+						BondedTokens: math.ZeroInt(),
 					},
 				},
 				mintProvision: inflation.QueryEpochMintProvisionResponse{
-					EpochMintProvision: sdk.NewDecCoin("acanto", sdk.NewInt(100)),
+					EpochMintProvision: sdk.NewDecCoin("acanto", math.NewInt(100)),
 				},
 			},
-			want: sdk.NewDec(0),
+			want: math.LegacyNewDec(0),
 		},
 		{
 			name: "mint provision is zero",
 			args: args{
 				pool: staking.QueryPoolResponse{
 					Pool: staking.Pool{
-						BondedTokens: sdk.NewInt(100),
+						BondedTokens: math.NewInt(100),
 					},
 				},
 				mintProvision: inflation.QueryEpochMintProvisionResponse{
-					EpochMintProvision: sdk.NewDecCoin("acanto", sdk.ZeroInt()),
+					EpochMintProvision: sdk.NewDecCoin("acanto", math.ZeroInt()),
 				},
 			},
-			want: sdk.NewDec(0),
+			want: math.LegacyNewDec(0),
 		},
 		{
 			name: "bonded tokens is less than mint provision",
 			args: args{
 				pool: staking.QueryPoolResponse{
 					Pool: staking.Pool{
-						BondedTokens: sdk.NewInt(100),
+						BondedTokens: math.NewInt(100),
 					},
 				},
 				mintProvision: inflation.QueryEpochMintProvisionResponse{
-					EpochMintProvision: sdk.NewDecCoin("acanto", sdk.NewInt(100000000000)),
+					EpochMintProvision: sdk.NewDecCoin("acanto", math.NewInt(100000000000)),
 				},
 			},
-			want: sdk.NewDec(36500000000000),
+			want: math.LegacyNewDec(36500000000000),
 		},
 		{
 			name: "mint provision is less than bonded tokens",
 			args: args{
 				pool: staking.QueryPoolResponse{
 					Pool: staking.Pool{
-						BondedTokens: sdk.NewInt(100000000000),
+						BondedTokens: math.NewInt(100000000000),
 					},
 				},
 				mintProvision: inflation.QueryEpochMintProvisionResponse{
-					EpochMintProvision: sdk.NewDecCoin("acanto", sdk.NewInt(100)),
+					EpochMintProvision: sdk.NewDecCoin("acanto", math.NewInt(100)),
 				},
 			},
-			want: sdk.MustNewDecFromStr("0.0000365"),
+			want: math.LegacyMustNewDecFromStr("0.0000365"),
 		},
 	}
 	for _, tt := range tests {

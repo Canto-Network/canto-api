@@ -5,13 +5,13 @@ import (
 	"strconv"
 	"time"
 
-	csr "github.com/Canto-Network/Canto/v6/x/csr/types"
-	inflation "github.com/Canto-Network/Canto/v6/x/inflation/types"
+	csr "github.com/Canto-Network/Canto/v8/x/csr/types"
+	inflation "github.com/Canto-Network/Canto/v8/x/inflation/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	query "github.com/cosmos/cosmos-sdk/types/query"
-	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
+
+	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
-	"github.com/rs/zerolog/log"
 )
 
 // STAKING
@@ -119,41 +119,30 @@ func GetAllProposals(ctx context.Context, queryClient gov.QueryClient) ([]Propos
 		// if vote is still ongoing, query the current tally
 		if proposal.Status == 2 {
 			resp, err := queryClient.TallyResult(ctx, &gov.QueryTallyResultRequest{
-				ProposalId: proposal.ProposalId,
+				ProposalId: proposal.Id,
 			})
 			if err == nil {
-				votes = resp.Tally
+				votes = *resp.Tally
 			}
 		} else {
-			votes = proposal.FinalTallyResult
-		}
-
-		// get proposal metadata
-		title := ""
-		description := ""
-		metadata, err := GetProposalMetadata(proposal.Content)
-		if err != nil {
-			log.Log().Msgf("Error getting proposal metadata: %v", err)
-		} else {
-			title = metadata.Title
-			description = metadata.Description
+			votes = *proposal.FinalTallyResult
 		}
 
 		proposalResponse := Proposal{
-			ProposalId:      proposal.ProposalId,
-			TypeUrl:         proposal.Content.TypeUrl,
-			Title:           title,
-			Description:     description,
+			ProposalId:      proposal.Id,
+			TypeUrl:         proposal.Messages[0].TypeUrl, // Pulling only first prop message
+			Title:           proposal.Title,
+			Description:     proposal.Summary,
 			Status:          proposal.Status.String(),
 			FinalVote:       votes,
-			SubmitTime:      proposal.SubmitTime,
-			DepositEndTime:  proposal.DepositEndTime,
+			SubmitTime:      *proposal.SubmitTime,
+			DepositEndTime:  *proposal.DepositEndTime,
 			TotalDeposit:    proposal.TotalDeposit,
-			VotingStartTime: proposal.VotingStartTime,
-			VotingEndTime:   proposal.VotingEndTime,
+			VotingStartTime: *proposal.VotingStartTime,
+			VotingEndTime:   *proposal.VotingEndTime,
 		}
 		*allProposals = append(*allProposals, proposalResponse)
-		proposalMap[strconv.Itoa(int(proposal.ProposalId))] = GeneralResultToString(proposalResponse)
+		proposalMap[strconv.Itoa(int(proposal.Id))] = GeneralResultToString(proposalResponse)
 	}
 	return *allProposals, proposalMap, nil
 }

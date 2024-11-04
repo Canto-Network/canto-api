@@ -8,7 +8,7 @@ import (
 
 	"canto-api/config"
 
-	cantoConfig "github.com/Canto-Network/Canto/v6/cmd/config"
+	cantoConfig "github.com/Canto-Network/Canto/v8/cmd/config"
 	"github.com/gofiber/fiber/v2"
 	"github.com/rs/zerolog/log"
 )

@@ -10,9 +10,10 @@ import (
 	"github.com/redis/go-redis/v9"
 	"github.com/rs/zerolog/log"
 
-	csr "github.com/Canto-Network/Canto/v6/x/csr/types"
-	inflation "github.com/Canto-Network/Canto/v6/x/inflation/types"
-	gov "github.com/cosmos/cosmos-sdk/x/gov/types"
+	csr "github.com/Canto-Network/Canto/v8/x/csr/types"
+	inflation "github.com/Canto-Network/Canto/v8/x/inflation/types"
+
+	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
