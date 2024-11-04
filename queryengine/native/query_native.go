@@ -13,7 +13,7 @@ import (
 	csr "github.com/Canto-Network/Canto/v8/x/csr/types"
 	inflation "github.com/Canto-Network/Canto/v8/x/inflation/types"
 
-	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1beta1"
+	gov "github.com/cosmos/cosmos-sdk/x/gov/types/v1"
 	staking "github.com/cosmos/cosmos-sdk/x/staking/types"
 )
 
