@@ -23,6 +23,13 @@ type BasicMetadata struct {
 func GetProposalMetadata(content *types1.Any) (BasicMetadata, error) {
 	typeUrl := content.TypeUrl
 	switch typeUrl {
+	case "/canto.govshuttle.v1.MsgLendingMarketProposal":
+		var metadata govshuttle.MsgLendingMarketProposal
+		metadata.Unmarshal(content.Value)
+		return BasicMetadata{
+			Title:       metadata.GetTitle(),
+			Description: metadata.GetDescription(),
+		}, nil
 	case "/canto.govshuttle.v1.LendingMarketProposal":
 		var metadata govshuttle.LendingMarketProposal
 		metadata.Unmarshal(content.Value)
@@ -75,4 +82,14 @@ func GetProposalMetadata(content *types1.Any) (BasicMetadata, error) {
 	default:
 		return BasicMetadata{}, fmt.Errorf("Proposal type: %s not found", typeUrl)
 	}
+}
+
+func anyToString(any *types1.Any) string {
+	// Marshal the Any type to JSON
+	jsonBytes, err := any.MarshalJSON()
+	if err != nil {
+		return ""
+	}
+	// Convert JSON bytes to string
+	return string(jsonBytes)
 }

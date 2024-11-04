@@ -2,3 +2,5 @@
 /canto-api
 canto-api
 .env
+.vscode
+.idea
