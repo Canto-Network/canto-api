@@ -18,10 +18,22 @@ services:
     restart: unless-stopped
     build:
       context: .
-    ports:
-      - "3000:3000"
+    expose:
+      - "3000"  # Internal port exposed to Nginx
     env_file:
       - .env
+
+  nginx:
+    image: nginx:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"     # HTTP
+      - "443:443"   # HTTPS
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf  # Nginx configuration file
+      - ./certs:/etc/ssl/certs              # SSL certificates folder
+    depends_on:
+      - canto-api
 
 volumes:
   redis-data:
